@@ -6,9 +6,10 @@ header {
 }
 
 header h1 {
+  font-size: 50px;
   margin: 0;
   padding: .5em 0;
-  color: black;
+  color: green;
 }
 
 nav ul {
@@ -23,7 +24,7 @@ nav ul li {
 
 /*Here is where the body styles start*/
 body {
-  background-color: #ccc;
+  background-color: #cd0c1e;
 }
 
 .container {

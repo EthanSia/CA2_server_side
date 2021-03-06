@@ -1,42 +1,42 @@
 <?php
 require_once('database.php');
 
-// Get category ID
-if (!isset($category_id)) {
-$category_id = filter_input(INPUT_GET, 'category_id', 
-FILTER_VALIDATE_INT);
-if ($category_id == NULL || $category_id == FALSE) {
-$category_id = 1;
-}
-}
+// Get model ID
+if (!isset($record_id)) {
+    $record_id = filter_input(INPUT_GET, 'record_id', 
+    FILTER_VALIDATE_INT);
+    if ($record_id == NULL || $record_id == FALSE) {
+    $record_id = 1;
+    }
+    }
 
-// Get name for current category
-$queryCategory = "SELECT * FROM categories
-WHERE categoryID = :category_id";
-$statement1 = $db->prepare($queryCategory);
-$statement1->bindValue(':category_id', $category_id);
+// Get all records
+$queryAllRecords = 'SELECT * FROM records
+ORDER BY modelID';
+$statement1 = $db->prepare($queryAllRecords);
 $statement1->execute();
-$category = $statement1->fetch();
+$records = $statement1->fetchAll();
 $statement1->closeCursor();
-$category_name = $category['categoryName'];
 
-// Get all categories
-$queryAllCategories = 'SELECT * FROM categories
-ORDER BY categoryID';
-$statement2 = $db->prepare($queryAllCategories);
-$statement2->execute();
-$categories = $statement2->fetchAll();
-$statement2->closeCursor();
+// Get model ID
+if (!isset($model_id)) {
+$model_id = filter_input(INPUT_GET, 'model_id', 
+FILTER_VALIDATE_INT);
+if ($model_id == NULL || $model_id == FALSE) {
+$model_id = 1;
+}
+}
 
-// Get records for selected category
-$queryRecords = "SELECT * FROM records
-WHERE categoryID = :category_id
-ORDER BY recordID";
-$statement3 = $db->prepare($queryRecords);
-$statement3->bindValue(':category_id', $category_id);
-$statement3->execute();
-$records = $statement3->fetchAll();
-$statement3->closeCursor();
+
+// Get all models
+$queryAllmodels = 'SELECT * FROM models
+ORDER BY modelID';
+$statement1 = $db->prepare($queryAllmodels);
+$statement1->execute();
+$models = $statement1->fetchAll();
+$statement1->closeCursor();
+
+
 
 // Get fuel ID
 if (!isset($fuel_id)) {
@@ -46,36 +46,15 @@ if (!isset($fuel_id)) {
     $fuel_id = 1;
     }
     }
-    
-    // Get name for current fuel
-    $queryFuel = "SELECT * FROM fuel
-    WHERE fuelID = :fuel_id";
-    $statement1 = $db->prepare($queryFuel);
-    $statement1->bindValue(':fuel_id', $fuel_id);
-    $statement1->execute();
-    $fuel = $statement1->fetch();
-    $statement1->closeCursor();
-    $fuel_name = $fuel['fuelName'];
+
 
 // Get all fuels
 $queryAllFuels = 'SELECT * FROM fuel
 ORDER BY fuelID';
-$statement2 = $db->prepare($queryAllFuels);
-$statement2->execute();
-$fuels = $statement2->fetchAll();
-$statement2->closeCursor();
-
-
-
-// Get records for selected fuel
-$queryRecords = "SELECT * FROM records
-WHERE fuelID = :fuel_id
-ORDER BY recordID";
-$statement3 = $db->prepare($queryRecords);
-$statement3->bindValue(':fuel_id', $fuel_id);
-$statement3->execute();
-$records = $statement3->fetchAll();
-$statement3->closeCursor();
+$statement1 = $db->prepare($queryAllFuels);
+$statement1->execute();
+$fuels = $statement1->fetchAll();
+$statement1->closeCursor();
 
 ?>
 <div class="container">
@@ -86,47 +65,101 @@ include('includes/header.php');
 
 <h1>Record List</h1>
 
-<aside>
-<!-- display a list of categories -->
-<h2>Categories</h2>
+<!-- display a list of fuels -->
+<form  method="post" action = " ">
+<h2>models</h2>
 <nav>
 <ul>
-<?php foreach ($categories as $category) : ?>
-<li><a href=".?category_id=<?php echo $category['categoryID']; ?>">
-<?php echo $category['categoryName']; ?>
-</a>
+<?php foreach ($models as $model) : ?>
+<li><input type ="checkbox" name="model[]"  value ="<?php echo $model['modelID']; ?>">
+<?php echo $model['modelName']; ?>
 </li>
 <?php endforeach; ?>
 </ul>
-</nav>          
-</aside>
-
-<aside>
-<!-- display a list of fuels -->
 <h2>Fuels</h2>
 <nav>
 <ul>
 <?php foreach ($fuels as $fuel) : ?>
-<li><a href=".?fuel_id=<?php echo $fuel['fuelID']; ?>">
-<?php echo $fuel['fuelName']; ?>
-</a>
-</li>
-<?php endforeach; ?>
-</ul>
-</nav>          
-</aside>
-
-<aside>
-<!-- display a list of fuels -->
-<form action = "filter_search.php" method="get">
-<h2>Fuels</h2>
-<nav>
-<ul>
-<?php foreach ($fuels as $fuel) : ?>
-<li><input type ="checkbox" name="fuels[]"  value =".?fuel_id=<?php echo $fuel['fuelID']; ?>">
+<li><input type ="checkbox" name="fuels[]"  value ="<?php echo $fuel['fuelID']; ?>">
 <?php echo $fuel['fuelName']; ?>
 <?php endforeach; ?>
+<?php
 
+if(!empty($_POST['model']) && !empty($_POST['fuels'])) 
+{
+    foreach($_POST['model'] as $selected_model_id)
+     {       
+        $sel_model_id = $selected_model_id;
+     }
+     foreach($_POST['fuels'] as $selected_fuel_id)
+     {
+        $sel_fuel_id = $selected_fuel_id;
+     }
+
+     $queryRecords = "SELECT * FROM records
+     WHERE modelID = :model_id
+     AND type_of_fuel LIKE ':fuel_type'
+     ORDER BY recordID";
+     $statement3 = $db->prepare($queryRecords);
+     $statement3->bindValue(':model_id', $sel_model_id);
+     $statement3->bindValue(':fuel_type', $fuel_name);
+     $statement3->execute();
+     $records = $statement3->fetchAll();
+     $statement3->closeCursor();
+   
+}
+
+if(!empty($_POST['fuels'])) {
+    foreach($_POST['fuels'] as $selected_id)
+     {
+           // Get name for current fuel
+          $queryFuel = "SELECT * FROM fuel
+          WHERE fuelID = :fuel_id";
+          $statement2 = $db->prepare($queryFuel);
+          $statement2->bindValue(':fuel_id', $selected_id);
+          $statement2->execute();
+          $fuel = $statement2->fetch();
+          $statement2->closeCursor();
+          $fuel_name = $fuel['fuelName'];
+
+        $queryRecords = "SELECT * FROM records
+        WHERE fuelID = :fuel_id
+        ORDER BY recordID";
+        $statement3 = $db->prepare($queryRecords);
+        $statement3->bindValue(':fuel_id', $selected_id);
+        $statement3->execute();
+        $records = $statement3->fetchAll();
+        $statement3->closeCursor();
+      
+    }
+   
+}
+
+if(!empty($_POST['model'])) 
+{
+    foreach($_POST['model'] as $selected_model_id)
+     { 
+        $querymodel = "SELECT * FROM models
+        WHERE modelID = :model_id";
+        $statement2 = $db->prepare($querymodel);
+        $statement2->bindValue(':model_id', $selected_model_id);
+        $statement2->execute();
+        $model = $statement2->fetch();
+        $statement2->closeCursor();
+        $model_name = $model['modelName'];
+        
+        $queryRecords = "SELECT * FROM records
+        WHERE modelID = :model_id
+        ORDER BY recordID";
+        $statement3 = $db->prepare($queryRecords);
+        $statement3->bindValue(':model_id', $selected_model_id);
+        $statement3->execute();
+        $records = $statement3->fetchAll();
+        $statement3->closeCursor();
+    }
+   
+}
+?>
 </ul>
 <input type="submit" value="submit">
 </nav>          
@@ -138,7 +171,7 @@ include('includes/header.php');
 
 <section>
 <!-- display a table of records -->
-<h2><?php echo $category_name; ?></h2>
+<h2><?php echo $model_name; ?></h2>
 <h2><?php echo $fuel_name; ?></h2>
 <h1>This is a normal h1</h1>
 <table>
@@ -164,8 +197,8 @@ id="delete_record_form">
 value="<?php echo $record['recordID']; ?>">
 <input type="hidden" name="fuel_id"
 value="<?php echo $record['fuelID']; ?>">
-<input type="hidden" name="category_id"
-value="<?php echo $record['categoryID']; ?>">
+<input type="hidden" name="model_id"
+value="<?php echo $record['modelID']; ?>">
 <input type="submit" value="Delete">
 </form></td>
 <td><form action="edit_record_form.php" method="post"
@@ -174,15 +207,15 @@ id="delete_record_form">
 value="<?php echo $record['recordID']; ?>">
 <input type="hidden" name="fuel_id"
 value="<?php echo $record['fuelID']; ?>">
-<input type="hidden" name="category_id"
-value="<?php echo $record['categoryID']; ?>">
+<input type="hidden" name="model_id"
+value="<?php echo $record['modelID']; ?>">
 <input type="submit" value="Edit">
 </form></td>
 </tr>
 <?php endforeach; ?>
 </table>
 <p><a href="add_record_form.php">Add Record</a></p>
-<p><a href="category_list.php">Manage Categories</a></p>
+<p><a href="model_list.php">Manage models</a></p>
 <p><a href="fuel_list.php">Manage Fuels</a></p>
 </section>
 <?php

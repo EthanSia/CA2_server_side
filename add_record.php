@@ -1,7 +1,7 @@
 <?php
 
 // Get the product data
-$category_id = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
+$model_id = filter_input(INPUT_POST, 'model_id', FILTER_VALIDATE_INT);
 $fuel_id = filter_input(INPUT_POST, 'fuel_id', FILTER_VALIDATE_INT);
 $name = filter_input(INPUT_POST, 'name');
 $description = filter_input(INPUT_POST, 'description');
@@ -9,7 +9,7 @@ $typeOfFuel = filter_input(INPUT_POST, 'typeOfFuel');
 $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
 
 // Validate inputs
-if ($category_id == null || $category_id == false || $fuel_id == null || $fuel_id == false ||
+if ($model_id == null || $model_id == false || $fuel_id == null || $fuel_id == false ||
     $name == null || $name == false  ||$description == null || $description == false || $typeOfFuel == null || $typeOfFuel == false || $price == null || $price == false ) {
     $error = "Invalid product data. Check all fields and try again.";
     include('error.php');
@@ -66,11 +66,11 @@ if ($category_id == null || $category_id == false || $fuel_id == null || $fuel_i
 
     // Add the product to the database 
     $query = "INSERT INTO records
-                 (categoryID, name, price, image)
+                 (modelID, name, price, image)
               VALUES
-                 (:category_id, :name, :price, :image)";
+                 (:model_id, :name, :price, :image)";
     $statement = $db->prepare($query);
-    $statement->bindValue(':category_id', $category_id);
+    $statement->bindValue(':model_id', $model_id);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':price', $price);
     $statement->bindValue(':image', $image);

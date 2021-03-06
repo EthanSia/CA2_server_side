@@ -1,5 +1,5 @@
 <?php
-// Get the category data
+
 $name = $name = filter_input(INPUT_POST, 'name');
 
 // Validate inputs

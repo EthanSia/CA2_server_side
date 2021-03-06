@@ -1,23 +1,23 @@
 <?php
 // Get ID
-$category_id = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
+$model_id = filter_input(INPUT_POST, 'model_id', FILTER_VALIDATE_INT);
 
 // Validate inputs
-if ($category_id == null || $category_id == false) {
-    $error = "Invalid category ID.";
+if ($model_id == null || $model_id == false) {
+    $error = "Invalid model ID.";
     include('error.php');
 } else {
     require_once('database.php');
 
     // Add the product to the database  
-    $query = 'DELETE FROM categories 
-              WHERE categoryID = :category_id';
+    $query = 'DELETE FROM models 
+              WHERE modelID = :model_id';
     $statement = $db->prepare($query);
-    $statement->bindValue(':category_id', $category_id);
+    $statement->bindValue(':model_id', $model_id);
     $statement->execute();
     $statement->closeCursor();
 
-    // Display the Category List page
-    include('category_list.php');
+    // Display the model List page
+    include('model_list.php');
 }
 ?>

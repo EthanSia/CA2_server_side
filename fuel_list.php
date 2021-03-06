@@ -36,7 +36,7 @@ include('includes/header.php');
     </table>
     <br>
 
-    <h2>Add Category</h2>
+    <h2>Add Fuel Type</h2>
     <form action="add_fuel.php" method="post"
           id="add_fuel_form">
 

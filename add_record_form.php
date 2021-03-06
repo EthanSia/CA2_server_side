@@ -1,11 +1,11 @@
 <?php
 require('database.php');
 $query = 'SELECT *
-          FROM categories
-          ORDER BY categoryID';
+          FROM models
+          ORDER BY modelID';
 $statement = $db->prepare($query);
 $statement->execute();
-$categories = $statement->fetchAll();
+$models = $statement->fetchAll();
 $statement->closeCursor();
 ?>
 
@@ -28,11 +28,11 @@ include('includes/header.php');
         <form action="add_record.php" method="post" enctype="multipart/form-data"
               id="add_record_form">
 
-            <label>Category:</label>
-            <select name="category_id">
-            <?php foreach ($categories as $category) : ?>
-                <option value="<?php echo $category['categoryID']; ?>">
-                    <?php echo $category['categoryName']; ?>
+            <label>model:</label>
+            <select name="model_id">
+            <?php foreach ($models as $model) : ?>
+                <option value="<?php echo $model['modelID']; ?>">
+                    <?php echo $model['modelName']; ?>
                 </option>
             <?php endforeach; ?>
             </select>

@@ -23,9 +23,9 @@ include('includes/header.php');
             <input type="hidden" name="record_id"
                    value="<?php echo $records['recordID']; ?>">
 
-            <label>Category ID:</label>
-            <input type="category_id" name="category_id"
-                   value="<?php echo $records['categoryID']; ?>">
+            <label>model ID:</label>
+            <input type="model_id" name="model_id"
+                   value="<?php echo $records['modelID']; ?>">
             <br>
 
             <label>Name:</label>

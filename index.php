@@ -56,6 +56,16 @@ $statement1->execute();
 $fuels = $statement1->fetchAll();
 $statement1->closeCursor();
 
+  // Get name for current fuel
+  $queryFuel = "SELECT * FROM fuel
+  WHERE fuelID = :fuel_id";
+  $statement2 = $db->prepare($queryFuel);
+  $statement2->bindValue(':fuel_id', $fuel_id);
+  $statement2->execute();
+  $fuel = $statement2->fetch();
+  $statement2->closeCursor();
+  $fuel_name = $fuel['fuelName'];
+
 ?>
 <div class="container">
 <?php
@@ -67,7 +77,7 @@ include('includes/header.php');
 
 <!-- display a list of fuels -->
 <form  method="post" action = " ">
-<h2>models</h2>
+<h2>Models</h2>
 <nav>
 <ul>
 <?php foreach ($models as $model) : ?>
@@ -97,11 +107,11 @@ if(!empty($_POST['model']) && !empty($_POST['fuels']))
      }
 
      $queryRecords = "SELECT * FROM records
-     WHERE modelID = :model_id
+     WHERE model LIKE ':model_name'
      AND type_of_fuel LIKE ':fuel_type'
      ORDER BY recordID";
      $statement3 = $db->prepare($queryRecords);
-     $statement3->bindValue(':model_id', $sel_model_id);
+     $statement3->bindValue(':model_name', $model_name);
      $statement3->bindValue(':fuel_type', $fuel_name);
      $statement3->execute();
      $records = $statement3->fetchAll();
@@ -178,6 +188,7 @@ if(!empty($_POST['model']))
 <tr>
 <th>Image</th>
 <th>Name</th>
+<th>Model</th>
 <th>Description</th>
 <th>Price</th>
 <th>Type of Fuel</th>
@@ -188,6 +199,7 @@ if(!empty($_POST['model']))
 <tr>
 <td><img src="image_uploads/<?php echo $record['image']; ?>" width="100px" height="100px" /></td>
 <td><?php echo $record['name']; ?></td>
+<td class="left"><?php echo $record['model']; ?></td>
 <td class="left"><?php echo $record['description']; ?></td>
 <td class="right"><?php echo $record['price']; ?></td>
 <td class="left"><?php echo $record['type_of_fuel']; ?></td>

@@ -5,7 +5,7 @@ $model_id = filter_input(INPUT_POST, 'model_id', FILTER_VALIDATE_INT);
 $fuel_id = filter_input(INPUT_POST, 'fuel_id', FILTER_VALIDATE_INT);
 $name = filter_input(INPUT_POST, 'name');
 $description = filter_input(INPUT_POST, 'description');
-$typeOfFuel = filter_input(INPUT_POST, 'typeOfFuel');
+$_SESSION['typeOfFuel'] = filter_input(INPUT_POST, 'typeOfFuel');
 $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
 
 // Validate inputs

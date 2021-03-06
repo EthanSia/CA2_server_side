@@ -1,6 +1,9 @@
 <?php
-require_once('database.php');
+session_start();
 
+require_once('database.php');
+$model_name = "";
+$fuel_name ="";
 // Get model ID
 if (!isset($record_id)) {
     $record_id = filter_input(INPUT_GET, 'record_id', 
@@ -9,6 +12,7 @@ if (!isset($record_id)) {
     $record_id = 1;
     }
     }
+
 
 // Get all records
 $queryAllRecords = 'SELECT * FROM records
@@ -55,17 +59,6 @@ $statement1 = $db->prepare($queryAllFuels);
 $statement1->execute();
 $fuels = $statement1->fetchAll();
 $statement1->closeCursor();
-
-  // Get name for current fuel
-  $queryFuel = "SELECT * FROM fuel
-  WHERE fuelID = :fuel_id";
-  $statement2 = $db->prepare($queryFuel);
-  $statement2->bindValue(':fuel_id', $fuel_id);
-  $statement2->execute();
-  $fuel = $statement2->fetch();
-  $statement2->closeCursor();
-  $fuel_name = $fuel['fuelName'];
-
 ?>
 <div class="container">
 <?php
@@ -81,11 +74,12 @@ include('includes/header.php');
 <nav>
 <ul>
 <?php foreach ($models as $model) : ?>
-<li><input type ="checkbox" name="model[]"  value ="<?php echo $model['modelID']; ?>">
+<li><input type ="checkbox" name="models[]"  value ="<?php echo $model['modelID']; ?>">
 <?php echo $model['modelName']; ?>
 </li>
 <?php endforeach; ?>
 </ul>
+</nav>
 <h2>Fuels</h2>
 <nav>
 <ul>
@@ -95,13 +89,16 @@ include('includes/header.php');
 <?php endforeach; ?>
 <?php
 
-if(!empty($_POST['model']) && !empty($_POST['fuels'])) 
+$_SESSION['models'] = isset($_POST['models']) ? $_POST['models'] : null;
+$_SESSION['fuels'] = isset($_POST['fuels']) ? $_POST['fuels'] : null;
+
+if(!empty($_SESSION['models']) && !empty($_SESSION['fuels'])) 
 {
-    foreach($_POST['model'] as $selected_model_id)
+    foreach($_SESSION['models'] as $selected_model_id)
      {       
         $sel_model_id = $selected_model_id;
      }
-     foreach($_POST['fuels'] as $selected_fuel_id)
+     foreach($_SESSION['fuels'] as $selected_fuel_id)
      {
         $sel_fuel_id = $selected_fuel_id;
      }
@@ -119,10 +116,10 @@ if(!empty($_POST['model']) && !empty($_POST['fuels']))
    
 }
 
-if(!empty($_POST['fuels'])) {
-    foreach($_POST['fuels'] as $selected_id)
+if(!empty($_SESSION['fuels']) && empty($_SESSION['models'])) {
+    foreach($_SESSION['fuels'] as $selected_id)
      {
-           // Get name for current fuel
+
           $queryFuel = "SELECT * FROM fuel
           WHERE fuelID = :fuel_id";
           $statement2 = $db->prepare($queryFuel);
@@ -142,12 +139,14 @@ if(!empty($_POST['fuels'])) {
         $statement3->closeCursor();
       
     }
+
+    echo "count is ".$count;
    
 }
 
-if(!empty($_POST['model'])) 
+if(!empty($_SESSION['models'])) 
 {
-    foreach($_POST['model'] as $selected_model_id)
+    foreach($_SESSION['models'] as $selected_model_id)
      { 
         $querymodel = "SELECT * FROM models
         WHERE modelID = :model_id";

@@ -1,9 +1,9 @@
 <?php
 
-$name = $name = filter_input(INPUT_POST, 'name');
+$_SESSION['name'] = filter_input(INPUT_POST, 'name');
 
 // Validate inputs
-if ($name == null) {
+if ($_SESSION['name']== null) {
     $error = "Invalid fuel data. Check all fields and try again.";
     include('error.php');
 } else {

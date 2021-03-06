@@ -51,6 +51,12 @@ include('includes/header.php');
             <input type="input" name="name" required>
             <br>
 
+            
+            <br>
+            <label>Model:</label>
+            <input type="input" name="model" required>
+            <br>
+
             <label>Description:</label>
             <input type="input" name="description" required>
             <br>

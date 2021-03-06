@@ -8,11 +8,11 @@ $name = filter_input(INPUT_POST, 'name');
 $model = filter_input(INPUT_POST, 'model');
 $description = filter_input(INPUT_POST, 'description');
 $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-$typeOfFuel = filter_input(INPUT_POST, 'typeOfFuel');
+$type_of_fuel = filter_input(INPUT_POST, 'type_of_fuel');
 // Validate inputs
 if ($record_id == NULL || $record_id == FALSE || $model_id == NULL ||
 $model_id == FALSE || $fuel_id == NULL || $fuel_id == FALSE || empty($name) || empty($model) ||empty($description) ||
-$price == NULL || $price == FALSE empty($typeOfFuel)) {
+$price == NULL || $price == FALSE || empty($type_of_fuel)) {
 $error = "Invalid record data. Check all fields and try again.";
 include('error.php');
 } else {
@@ -53,11 +53,12 @@ require_once('database.php');
 
 $query = 'UPDATE records
 SET modelID = :model_id,
+fuelID = :fuel_id
 name = :name,
 model = :model,
 description = :description,
 price = :price,
-type_of_fuel = :typeOfFuel,
+type_of_fuel = :type_of_fuel,
 image = :image
 WHERE recordID = :record_id';
 $statement = $db->prepare($query);
@@ -67,7 +68,7 @@ $statement->bindValue(':name', $name);
 $statement->bindValue(':model', $model);
 $statement->bindValue(':description', $description);
 $statement->bindValue(':price', $price);
-$statement->bindValue(':typeOfFuel', $typeOfFuel);
+$statement->bindValue(':type_of_fuel', $type_of_fuel);
 $statement->bindValue(':image', $image);
 $statement->bindValue(':record_id', $record_id);
 $statement->execute();

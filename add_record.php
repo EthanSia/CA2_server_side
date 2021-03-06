@@ -11,11 +11,13 @@ $type_of_fuel = filter_input(INPUT_POST, 'type_of_fuel');
 
 // Validate inputs
 if ($model_id == null || $model_id == false || $fuel_id == null || $fuel_id == false ||
-    $name == null || $name == false ||$model == null || $model== false ||$description == null || $description == false || $type_of_fuel == null || $type_of_fuel == false || $price == null || $price == false ) {
-    $error = "Invalid product data. Check all fields and try again.";
-    include('error.php');
-    exit();
-} else {
+    $name == null || $name == false ||$model == null || $model== false ||$description == null || $description == false || $price == null || $price == false  $type_of_fuel == null || $type_of_fuel == false ) 
+    {
+          $error = "Invalid product data. Check all fields and try again.";
+          include('error.php');
+          exit();
+    } 
+    else {
 
     /**************************** Image upload ****************************/
 

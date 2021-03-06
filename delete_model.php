@@ -9,7 +9,6 @@ if ($model_id == null || $model_id == false) {
 } else {
     require_once('database.php');
 
-    // Add the product to the database  
     $query = 'DELETE FROM models 
               WHERE modelID = :model_id';
     $statement = $db->prepare($query);
@@ -17,7 +16,7 @@ if ($model_id == null || $model_id == false) {
     $statement->execute();
     $statement->closeCursor();
 
-    // Display the model List page
+
     include('model_list.php');
 }
 ?>

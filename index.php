@@ -98,22 +98,46 @@ if(!empty($_POST['models']) && !empty($_POST['fuels']))
         $sel_fuel_id = $selected_fuel_id;
      }
 
+     echo  $sel_model_id;
+
+     $queryFuel = "SELECT * FROM fuel
+     WHERE fuelID = :fuel_id";
+     $statement2 = $db->prepare($queryFuel);
+     $statement2->bindValue(':fuel_id', $sel_fuel_id);
+     $statement2->execute();
+     $fuel = $statement2->fetch();
+     $statement2->closeCursor();
+     $fuel_name = $fuel['fuelName'];
+
+     $querymodel = "SELECT * FROM models
+        WHERE modelID = :model_id";
+        $statement3 = $db->prepare($querymodel);
+        $statement3->bindValue(':model_id', $sel_model_id);
+        $statement3->execute();
+        $model = $statement3->fetch();
+        $statement3->closeCursor();
+        $model_name = $model['modelName'];
+
      $queryRecords = "SELECT * FROM records
-     WHERE model LIKE ':model_name'
-     AND type_of_fuel LIKE ':fuel_type'
+     WHERE modelID = :model_id
+     AND fuelID = :fuel_id
      ORDER BY recordID";
-     $statement3 = $db->prepare($queryRecords);
-     $statement3->bindValue(':model_name', $model_name);
-     $statement3->bindValue(':fuel_type', $fuel_name);
-     $statement3->execute();
-     $records = $statement3->fetchAll();
-     $statement3->closeCursor();
+     $statement4 = $db->prepare($queryRecords);
+     $statement4->bindValue(':fuel_id', $sel_fuel_id);
+     $statement4->bindValue(':model_id', $sel_model_id);
+     $statement4->execute();
+     $records = $statement4->fetchAll();
+     $statement4->closeCursor();
+
+    
    
 }
 
 if(!empty($_POST['fuels']) && empty($_POST['models'])) {
     foreach($_POST['fuels'] as $selected_id)
      {
+
+    
 
           $queryFuel = "SELECT * FROM fuel
           WHERE fuelID = :fuel_id";
@@ -134,8 +158,6 @@ if(!empty($_POST['fuels']) && empty($_POST['models'])) {
         $statement3->closeCursor();
       
     }
-
-    echo "count is ".$count;
    
 }
 

@@ -1,12 +1,12 @@
 <?php
 require('database.php');
 
-$_SESSION['record_id'] = filter_input(INPUT_POST, 'record_id', FILTER_VALIDATE_INT);
+$record_id = filter_input(INPUT_POST, 'record_id', FILTER_VALIDATE_INT);
 $query = 'SELECT *
           FROM records
           WHERE recordID = :record_id';
 $statement = $db->prepare($query);
-$statement->bindValue(':record_id', $_SESSION['record_id']);
+$statement->bindValue(':record_id', $record_id);
 $statement->execute();
 $records = $statement->fetch(PDO::FETCH_ASSOC);
 $statement->closeCursor();
@@ -23,14 +23,24 @@ include('includes/header.php');
             <input type="hidden" name="record_id"
                    value="<?php echo $records['recordID']; ?>">
 
-            <label>model ID:</label>
+            <label>Model ID:</label>
             <input type="model_id" name="model_id"
                    value="<?php echo $records['modelID']; ?>">
+            <br>
+
+            <label>Fuel ID:</label>
+            <input type="fuel_id" name="fuel_id"
+                   value="<?php echo $records['fuelID']; ?>">
             <br>
 
             <label>Name:</label>
             <input type="input" name="name"
                    value="<?php echo $records['name']; ?>">
+            <br>
+
+            <label>Model:</label>
+            <input type="input" name="model"
+                   value="<?php echo $records['model']; ?>">
             <br>
 
             <label>Description:</label>
@@ -42,6 +52,11 @@ include('includes/header.php');
             <label>List Price:</label>
             <input type="input" name="price"
                    value="<?php echo $records['price']; ?>">
+            <br>
+
+            <label>Type of fuel:</label>
+            <input type="input" name="type_of_fuel"
+                   value="<?php echo $records['type_of_fuel']; ?>">
             <br>
 
             <label>Image:</label>

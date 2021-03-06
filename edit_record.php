@@ -1,18 +1,18 @@
 <?php
 
 // Get the record data
-$_SESSION['record_id'] = filter_input(INPUT_POST, 'record_id', FILTER_VALIDATE_INT);
-$_SESSION['model_id'] = filter_input(INPUT_POST, 'model_id', FILTER_VALIDATE_INT);
-$_SESSION['fuel_id'] = filter_input(INPUT_POST, 'fuel_id', FILTER_VALIDATE_INT);
-$_SESSION['name'] = filter_input(INPUT_POST, 'name');
-$_SESSION['model'] = filter_input(INPUT_POST, 'model');
-$_SESSION['description'] = filter_input(INPUT_POST, 'description');
-$_SESSION['price'] = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-$_SESSION['typeOfFuel'] = filter_input(INPUT_POST, 'typeOfFuel');
+$record_id = filter_input(INPUT_POST, 'record_id', FILTER_VALIDATE_INT);
+$model_id = filter_input(INPUT_POST, 'model_id', FILTER_VALIDATE_INT);
+$fuel_id = filter_input(INPUT_POST, 'fuel_id', FILTER_VALIDATE_INT);
+$name = filter_input(INPUT_POST, 'name');
+$model = filter_input(INPUT_POST, 'model');
+$description = filter_input(INPUT_POST, 'description');
+$price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
+$typeOfFuel = filter_input(INPUT_POST, 'typeOfFuel');
 // Validate inputs
-if ($_SESSION['record_id'] == NULL || $_SESSION['record_id'] == FALSE || $_SESSION['model_id'] == NULL ||
-$_SESSION['model_id'] == FALSE || $_SESSION['fuel_id'] == NULL || $_SESSION['fuel_id'] == FALSE || empty($_SESSION['name']) || empty($_SESSION['name']) || empty($_SESSION['model']) || empty($_SESSION['description']) ||
-$_SESSION['price'] == NULL || $_SESSION['price'] == FALSE empty($_SESSION['typeOfFuel'])) {
+if ($record_id == NULL || $record_id == FALSE || $model_id == NULL ||
+$model_id == FALSE || $fuel_id == NULL || $fuel_id == FALSE || empty($name) || empty($model) ||empty($description) ||
+$price == NULL || $price == FALSE empty($typeOfFuel)) {
 $error = "Invalid record data. Check all fields and try again.";
 include('error.php');
 } else {
@@ -53,24 +53,23 @@ require_once('database.php');
 
 $query = 'UPDATE records
 SET modelID = :model_id,
-SET fuelID = :fuel_id,
 name = :name,
 model = :model,
 description = :description,
 price = :price,
-typeofFuel =:typeOfFuel,
+type_of_fuel = :typeOfFuel,
 image = :image
 WHERE recordID = :record_id';
 $statement = $db->prepare($query);
-$statement->bindValue(':model_id', $_SESSION['model_id']);
-$statement->bindValue(':fuel_id', $_SESSION['fuel_id']);
-$statement->bindValue(':name', $_SESSION['name']);
-$statement->bindValue(':model', $_SESSION['model']);
-$statement->bindValue(':description', $_SESSION['description']);
-$statement->bindValue(':price', $_SESSION['price']);
-$statement->bindValue(':typeOfFuel', $_SESSION['typeOfFuel']);
+$statement->bindValue(':model_id', $model_id);
+$statement->bindValue(':fuel_id', $fuel_id);
+$statement->bindValue(':name', $name);
+$statement->bindValue(':model', $model);
+$statement->bindValue(':description', $description);
+$statement->bindValue(':price', $price);
+$statement->bindValue(':typeOfFuel', $typeOfFuel);
 $statement->bindValue(':image', $image);
-$statement->bindValue(':record_id', $_SESSION['record_id']);
+$statement->bindValue(':record_id', $record_id);
 $statement->execute();
 $statement->closeCursor();
 

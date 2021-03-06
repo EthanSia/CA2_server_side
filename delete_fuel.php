@@ -1,9 +1,9 @@
 <?php
 // Get ID
-$_SESSION['fuel_id'] = filter_input(INPUT_POST, 'fuel_id', FILTER_VALIDATE_INT);
+$fuel_id = filter_input(INPUT_POST, 'fuel_id', FILTER_VALIDATE_INT);
 
 // Validate inputs
-if ($_SESSION['fuel_id'] == null || $_SESSION['fuel_id'] == false) {
+if ($fuel_id == null || $fuel_id == false) {
     $error = "Invalid fuel ID.";
     include('error.php');
 } else {
@@ -13,7 +13,7 @@ if ($_SESSION['fuel_id'] == null || $_SESSION['fuel_id'] == false) {
     $query = 'DELETE FROM fuel 
               WHERE fuelID = :fuel_id';
     $statement = $db->prepare($query);
-    $statement->bindValue(':fuel_id', $_SESSION['fuel_id']);
+    $statement->bindValue(':fuel_id', $fuel_id);
     $statement->execute();
     $statement->closeCursor();
 

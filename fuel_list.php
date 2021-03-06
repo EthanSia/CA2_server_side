@@ -1,12 +1,12 @@
 <?php
     require_once('database.php');
 
-    // Get all fuels$_SESSION['fuels']
+    // Get all fuels$fuels
     $query = 'SELECT * FROM fuel
               ORDER BY fuelID';
     $statement = $db->prepare($query);
     $statement->execute();
-    $_SESSION['fuels'] = $statement->fetchAll();
+    $fuels = $statement->fetchAll();
     $statement->closeCursor();
 ?>
 <!-- the head section -->
@@ -20,7 +20,7 @@ include('includes/header.php');
             <th>Name</th>
             <th>&nbsp;</th>
         </tr>
-        <?php foreach ($_SESSION['fuels'] as $fuel) : ?>
+        <?php foreach ($fuels as $fuel) : ?>
         <tr>
             <td><?php echo $fuel['fuelName']; ?></td>
             <td>
@@ -36,7 +36,7 @@ include('includes/header.php');
     </table>
     <br>
 
-    <h2>Add Fuel Type</h2>
+    <h2>Add Fuel</h2>
     <form action="add_fuel.php" method="post"
           id="add_fuel_form">
 

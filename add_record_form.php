@@ -67,7 +67,7 @@ include('includes/header.php');
             <br>    
             
             <label>Type of fuel:</label>
-            <input type="input" name="typeOfFuel" required>
+            <input type="input" name="type_of_fuel" required>
             <br>
             
             <label>Image:</label>

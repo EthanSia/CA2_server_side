@@ -58,6 +58,7 @@ name = :name,
 model = :model,
 description = :description,
 price = :price,
+typeofFuel =:typeOfFuel,
 image = :image
 WHERE recordID = :record_id';
 $statement = $db->prepare($query);

@@ -8,6 +8,17 @@ $statement->execute();
 $categories = $statement->fetchAll();
 $statement->closeCursor();
 ?>
+
+<?php
+require('database.php');
+$query = 'SELECT *
+          FROM fuel
+          ORDER BY fuelID';
+$statement = $db->prepare($query);
+$statement->execute();
+$fuels = $statement->fetchAll();
+$statement->closeCursor();
+?>
 <!-- the head section -->
  <div class="container">
 <?php
@@ -25,14 +36,33 @@ include('includes/header.php');
                 </option>
             <?php endforeach; ?>
             </select>
+
+            <label>Fuel:</label>
+            <select name="fuel_id">
+            <?php foreach ($fuels as $fuel) : ?>
+                <option value="<?php echo $fuel['fuelID']; ?>">
+                    <?php echo $fuel['fuelName']; ?>
+                </option>
+            <?php endforeach; ?>
+            </select>
+
             <br>
             <label>Name:</label>
-            <input type="input" name="name">
+            <input type="input" name="name" required>
+            <br>
+
+            <label>Description:</label>
+            <input type="input" name="description" required>
             <br>
 
             <label>List Price:</label>
             <input type="input" name="price">
-            <br>        
+            <br>"Price must be double"<br>
+            <br>    
+            
+            <label>Type of fuel:</label>
+            <input type="input" name="typeOfFuel" required>
+            <br>
             
             <label>Image:</label>
             <input type="file" name="image" accept="image/*" />

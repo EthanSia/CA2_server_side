@@ -87,6 +87,10 @@ br {
   text-align: right;
 }
 
+.left{
+  text-align: left;  
+}
+
 .last_paragraph {
   margin-bottom: 2em;
 }

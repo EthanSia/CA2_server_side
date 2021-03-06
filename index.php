@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once('database.php');
 $model_name = "";
 $fuel_name ="";
@@ -89,16 +87,13 @@ include('includes/header.php');
 <?php endforeach; ?>
 <?php
 
-$_SESSION['models'] = isset($_POST['models']) ? $_POST['models'] : null;
-$_SESSION['fuels'] = isset($_POST['fuels']) ? $_POST['fuels'] : null;
-
-if(!empty($_SESSION['models']) && !empty($_SESSION['fuels'])) 
+if(!empty($_POST['models']) && !empty($_POST['fuels'])) 
 {
-    foreach($_SESSION['models'] as $selected_model_id)
+    foreach($_POST['models'] as $selected_model_id)
      {       
         $sel_model_id = $selected_model_id;
      }
-     foreach($_SESSION['fuels'] as $selected_fuel_id)
+     foreach($_POST['fuels'] as $selected_fuel_id)
      {
         $sel_fuel_id = $selected_fuel_id;
      }
@@ -116,8 +111,8 @@ if(!empty($_SESSION['models']) && !empty($_SESSION['fuels']))
    
 }
 
-if(!empty($_SESSION['fuels']) && empty($_SESSION['models'])) {
-    foreach($_SESSION['fuels'] as $selected_id)
+if(!empty($_POST['fuels']) && empty($_POST['models'])) {
+    foreach($_POST['fuels'] as $selected_id)
      {
 
           $queryFuel = "SELECT * FROM fuel
@@ -144,9 +139,9 @@ if(!empty($_SESSION['fuels']) && empty($_SESSION['models'])) {
    
 }
 
-if(!empty($_SESSION['models'])) 
+if(!empty($_POST['models'])) 
 {
-    foreach($_SESSION['models'] as $selected_model_id)
+    foreach($_POST['models'] as $selected_model_id)
      { 
         $querymodel = "SELECT * FROM models
         WHERE modelID = :model_id";

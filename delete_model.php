@@ -1,9 +1,9 @@
 <?php
 // Get ID
-$model_id = filter_input(INPUT_POST, 'model_id', FILTER_VALIDATE_INT);
+$_SESSION['model_id'] = filter_input(INPUT_POST, 'model_id', FILTER_VALIDATE_INT);
 
 // Validate inputs
-if ($model_id == null || $model_id == false) {
+if ($_SESSION['model_id'] == null || $_SESSION['model_id'] == false) {
     $error = "Invalid model ID.";
     include('error.php');
 } else {
@@ -13,7 +13,7 @@ if ($model_id == null || $model_id == false) {
     $query = 'DELETE FROM models 
               WHERE modelID = :model_id';
     $statement = $db->prepare($query);
-    $statement->bindValue(':model_id', $model_id);
+    $statement->bindValue(':model_id', $_SESSION['model_id']);
     $statement->execute();
     $statement->closeCursor();
 

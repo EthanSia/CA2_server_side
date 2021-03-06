@@ -6,7 +6,7 @@
               ORDER BY modelID';
     $statement = $db->prepare($query);
     $statement->execute();
-    $models = $statement->fetchAll();
+    $_SESSION['models'] = $statement->fetchAll();
     $statement->closeCursor();
 ?>
 <!-- the head section -->
@@ -20,7 +20,7 @@ include('includes/header.php');
             <th>Name</th>
             <th>&nbsp;</th>
         </tr>
-        <?php foreach ($models as $model) : ?>
+        <?php foreach ($_SESSION['models'] as $model) : ?>
         <tr>
             <td><?php echo $model['modelName']; ?></td>
             <td>

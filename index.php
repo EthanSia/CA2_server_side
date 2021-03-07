@@ -197,9 +197,13 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 
 
 <section class="ftco-section">
+<div class="container">
 <!-- display a table of records -->
 <h2><?php echo $model_name; ?></h2>
 <h2><?php echo $fuel_name; ?></h2>
+<div class="row">
+<div class="col-md-12">
+<div class="table-wrap">
 <table class= "table">
 <thead class="thead-primary">
 <tr>
@@ -210,7 +214,8 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 <th>Delete</th>
 <th>Edit</th>
 </tr>
-<thead class="thead-primary">
+</thead>
+<tbody>
 <?php foreach ($records as $record) : ?>
 <tr class="alert" role="alert">
 <td class="img"><img src="image_uploads/<?php echo $record['image']; ?>" width="100px" height="100px" /></td>
@@ -239,7 +244,12 @@ value="<?php echo $record['modelID']; ?>">
 </form></td>
 </tr>
 <?php endforeach; ?>
+</tbody>
 </table>
+</div>
+</div>
+</div>
+</div>
 <p><a href="add_record_form.php">Add Record</a></p>
 <p><a href="model_list.php">Manage models</a></p>
 <p><a href="fuel_list.php">Manage Fuels</a></p>

@@ -19,6 +19,8 @@ $statement->execute();
 $fuels = $statement->fetchAll();
 $statement->closeCursor();
 ?>
+
+
 <!-- the head section -->
  <div class="container">
 <?php
@@ -36,6 +38,7 @@ include('includes/header.php');
                 </option>
             <?php endforeach; ?>
             </select>
+            <br>
 
             <label>Fuel:</label>
             <select name="fuel_id">

@@ -88,7 +88,8 @@ br {
 }
 
 .left{
-  text-align: left;  
+  text-align: left;
+  width : 200px;  
 }
 
 .last_paragraph {

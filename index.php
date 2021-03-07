@@ -161,7 +161,7 @@ if(!empty($_POST['fuels']) && empty($_POST['models'])) {
    
 }
 
-if(!empty($_POST['models'])) 
+if(!empty($_POST['models']) && empty($_POST['fuels'])) 
 {
     foreach($_POST['models'] as $selected_model_id)
      { 

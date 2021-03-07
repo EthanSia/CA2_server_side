@@ -11,6 +11,27 @@ $statement->execute();
 $records = $statement->fetch(PDO::FETCH_ASSOC);
 $statement->closeCursor();
 ?>
+<?php
+require('database.php');
+$query = 'SELECT *
+          FROM models
+          ORDER BY modelID';
+$statement = $db->prepare($query);
+$statement->execute();
+$models = $statement->fetchAll();
+$statement->closeCursor();
+?>
+
+<?php
+require('database.php');
+$query = 'SELECT *
+          FROM fuel
+          ORDER BY fuelID';
+$statement = $db->prepare($query);
+$statement->execute();
+$fuels = $statement->fetchAll();
+$statement->closeCursor();
+?>
 <!-- the head section -->
  <div class="container">
 <?php
@@ -22,15 +43,25 @@ include('includes/header.php');
             <input type="hidden" name="original_image" value="<?php echo $records['image']; ?>" />
             <input type="hidden" name="record_id"
                    value="<?php echo $records['recordID']; ?>">
-
-            <label>Model ID:</label>
-            <input type="model_id" name="model_id"
-                   value="<?php echo $records['modelID']; ?>">
+       
+                   <label>Model:</label>
+            <select name="model_id">
+            <?php foreach ($models as $model) : ?>
+                <option value="<?php echo $model['modelID']; ?>">
+                    <?php echo $model['modelName']; ?>
+                </option>
+            <?php endforeach; ?>
+            </select>
             <br>
 
-            <label>Fuel ID:</label>
-            <input type="fuel_id" name="fuel_id"
-                   value="<?php echo $records['fuelID']; ?>">
+            <label>Fuel:</label>
+            <select name="fuel_id">
+            <?php foreach ($fuels as $fuel) : ?>
+                <option value="<?php echo $fuel['fuelID']; ?>">
+                    <?php echo $fuel['fuelName']; ?>
+                </option>
+            <?php endforeach; ?>
+            </select>
             <br>
 
             <label>Name:</label>

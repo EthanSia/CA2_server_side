@@ -51,9 +51,11 @@ $image = $original_image; // old image from database
 // If valid, update the record in the database
 require_once('database.php');
 
+echo $record_id;
+
 $query = 'UPDATE records
 SET modelID = :model_id,
-fuelID = :fuel_id
+fuelID = :fuel_id,
 name = :name,
 model = :model,
 description = :description,

@@ -16,7 +16,7 @@ if ($model_id == null || $model_id == false) {
     $statement->execute();
     $statement->closeCursor();
 
-    $query = 'DELETE FROM records 
+    $query = 'DELETE FROM cars 
     WHERE modelID = :model_id';
     $statement1 = $db->prepare($query);
     $statement1->bindValue(':model_id', $model_id);

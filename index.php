@@ -2,22 +2,22 @@
 require_once('database.php');
 $model_name = "";
 $fuel_name ="";
-// Get Record ID
-if (!isset($record_id)) {
-    $record_id = filter_input(INPUT_GET, 'record_id', 
+// Get car ID
+if (!isset($car_id)) {
+    $car_id = filter_input(INPUT_GET, 'car_id', 
     FILTER_VALIDATE_INT);
-    if ($record_id == NULL || $record_id == FALSE) {
-    $record_id = 1;
+    if ($car_id == NULL || $car_id == FALSE) {
+    $car_id = 1;
     }
     }
 
 
-// Get all records
-$queryAllRecords = 'SELECT * FROM records
+// Get all cars
+$queryAllcars = 'SELECT * FROM cars
 ORDER BY modelID';
-$statement1 = $db->prepare($queryAllRecords);
+$statement1 = $db->prepare($queryAllcars);
 $statement1->execute();
-$records = $statement1->fetchAll();
+$cars = $statement1->fetchAll();
 $statement1->closeCursor();
 
 // Get model ID
@@ -64,11 +64,12 @@ include('includes/header.php');
 ?>
 
 
-<h1>Record List</h1>
+<h1>Car List</h1>
 
 <!-- display a list of fuels -->
 <form  method="post" action = " ">
-<h1><a href="index.php">All Records</a></h1>
+<h1><a href="index.php">All Cars</a></h1>
+
 <h2>Models</h2>
 <nav>
 <ul>
@@ -79,6 +80,7 @@ include('includes/header.php');
 <?php endforeach; ?>
 </ul>
 </nav>
+<div id ="fuels_side">
 <h2>Fuels</h2>
 <nav>
 <ul>
@@ -119,15 +121,15 @@ if(!empty($_POST['models']) && !empty($_POST['fuels']))
         $statement3->closeCursor();
         $model_name = $model['modelName'];
 
-     $queryRecords = "SELECT * FROM records
+     $querycars = "SELECT * FROM cars
      WHERE modelID = :model_id
      AND fuelID = :fuel_id
-     ORDER BY recordID";
-     $statement4 = $db->prepare($queryRecords);
+     ORDER BY carID";
+     $statement4 = $db->prepare($querycars);
      $statement4->bindValue(':fuel_id', $sel_fuel_id);
      $statement4->bindValue(':model_id', $sel_model_id);
      $statement4->execute();
-     $records = $statement4->fetchAll();
+     $cars = $statement4->fetchAll();
      $statement4->closeCursor();
 
     
@@ -149,13 +151,13 @@ if(!empty($_POST['fuels']) && empty($_POST['models'])) {
           $statement2->closeCursor();
           $fuel_name = $fuel['fuelName'];
 
-        $queryRecords = "SELECT * FROM records
+        $querycars = "SELECT * FROM cars
         WHERE fuelID = :fuel_id
-        ORDER BY recordID";
-        $statement3 = $db->prepare($queryRecords);
+        ORDER BY carID";
+        $statement3 = $db->prepare($querycars);
         $statement3->bindValue(':fuel_id', $selected_id);
         $statement3->execute();
-        $records = $statement3->fetchAll();
+        $cars = $statement3->fetchAll();
         $statement3->closeCursor();
       
     }
@@ -175,13 +177,13 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
         $statement2->closeCursor();
         $model_name = $model['modelName'];
         
-        $queryRecords = "SELECT * FROM records
+        $querycars = "SELECT * FROM cars
         WHERE modelID = :model_id
-        ORDER BY recordID";
-        $statement3 = $db->prepare($queryRecords);
+        ORDER BY carID";
+        $statement3 = $db->prepare($querycars);
         $statement3->bindValue(':model_id', $selected_model_id);
         $statement3->execute();
-        $records = $statement3->fetchAll();
+        $cars = $statement3->fetchAll();
         $statement3->closeCursor();
     }
    
@@ -189,7 +191,8 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 ?>
 </ul>
 <input type="submit" value="submit">
-</nav>          
+</nav> 
+</div>         
 </aside>
 
 </form>
@@ -197,13 +200,9 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 
 
 <section class="ftco-section">
-<div class="container">
-<!-- display a table of records -->
+<!-- display a table of cars -->
 <h2><?php echo $model_name; ?></h2>
 <h2><?php echo $fuel_name; ?></h2>
-<div class="row">
-<div class="col-md-12">
-<div class="table-wrap">
 <table class= "table">
 <thead class="thead-primary">
 <tr>
@@ -214,43 +213,37 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 <th>Delete</th>
 <th>Edit</th>
 </tr>
-</thead>
-<tbody>
-<?php foreach ($records as $record) : ?>
+<thead class="thead-primary">
+<?php foreach ($cars as $car) : ?>
 <tr class="alert" role="alert">
-<td class="img"><img src="image_uploads/<?php echo $record['image']; ?>" width="100px" height="100px" /></td>
-<td><?php echo $record['name']; ?></td>
-<td class="email"><?php echo $record['description']; ?></td>
-<td class="quantity"><?php echo $record['price']; ?></td>
-<td><form action="delete_record.php" method="post"
-id="delete_record_form">
-<input type="hidden" name="record_id"
-value="<?php echo $record['recordID']; ?>">
+<td class="img"><img src="image_uploads/<?php echo $car['image']; ?>" width="100px" height="100px" /></td>
+<td><?php echo $car['name']; ?></td>
+<td class="email"><?php echo $car['description']; ?></td>
+<td class="quantity"><?php echo $car['price']; ?></td>
+<td><form action="delete_car.php" method="post"
+id="delete_car_form">
+<input type="hidden" name="car_id"
+value="<?php echo $car['carID']; ?>">
 <input type="hidden" name="fuel_id"
-value="<?php echo $record['fuelID']; ?>">
+value="<?php echo $car['fuelID']; ?>">
 <input type="hidden" name="model_id"
-value="<?php echo $record['modelID']; ?>">
+value="<?php echo $car['modelID']; ?>">
 <input type="submit" value="Delete">
 </form></td>
-<td><form action="edit_record_form.php" method="post"
-id="delete_record_form">
-<input type="hidden" name="record_id"
-value="<?php echo $record['recordID']; ?>">
+<td><form action="edit_car_form.php" method="post"
+id="delete_car_form">
+<input type="hidden" name="car_id"
+value="<?php echo $car['carID']; ?>">
 <input type="hidden" name="fuel_id"
-value="<?php echo $record['fuelID']; ?>">
+value="<?php echo $car['fuelID']; ?>">
 <input type="hidden" name="model_id"
-value="<?php echo $record['modelID']; ?>">
+value="<?php echo $car['modelID']; ?>">
 <input type="submit" value="Edit">
 </form></td>
 </tr>
 <?php endforeach; ?>
-</tbody>
 </table>
-</div>
-</div>
-</div>
-</div>
-<p><a href="add_record_form.php">Add Record</a></p>
+<p><a href="add_car_form.php">Add Car</a></p>
 <p><a href="model_list.php">Manage models</a></p>
 <p><a href="fuel_list.php">Manage Fuels</a></p>
 </section>

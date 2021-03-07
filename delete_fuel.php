@@ -17,7 +17,7 @@ if ($fuel_id == null || $fuel_id == false) {
     $statement->execute();
     $statement->closeCursor();
 
-    $query = 'DELETE FROM records 
+    $query = 'DELETE FROM cars 
     WHERE fuelID = :fuel_id';
     $statement1 = $db->prepare($query);
     $statement1->bindValue(':fuel_id', $fuel_id);

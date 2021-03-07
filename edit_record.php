@@ -1,40 +1,4 @@
 <?php
-require_once('database.php');
-// Get fuel ID
-if (!isset($fuel_id)) {
-    $fuel_id = filter_input(INPUT_GET, 'fuel_id', 
-    FILTER_VALIDATE_INT);
-    if ($fuel_id == NULL || $fuel_id == FALSE) {
-    $fuel_id = 1;
-    }
-    }
-
-// Get all fuels
-$queryAllFuels = 'SELECT * FROM fuel
-ORDER BY fuelID';
-$statement1 = $db->prepare($queryAllFuels);
-$statement1->execute();
-$fuels = $statement1->fetchAll();
-$statement1->closeCursor();
-
-// Get model ID
-if (!isset($model_id)) {
-    $model_id = filter_input(INPUT_GET, 'model_id', 
-    FILTER_VALIDATE_INT);
-    if ($model_id == NULL || $model_id == FALSE) {
-    $model_id = 1;
-    }
-    }
-    
-    
-// Get all models
-$queryAllmodels = 'SELECT * FROM models
-ORDER BY modelID';
-$statement1 = $db->prepare($queryAllmodels);
-$statement1->execute();
-$models = $statement1->fetchAll();
-$statement1->closeCursor();
-
 
 // Get the record data
 $record_id = filter_input(INPUT_POST, 'record_id', FILTER_VALIDATE_INT);

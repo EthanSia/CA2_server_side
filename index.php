@@ -204,10 +204,8 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 <tr>
 <th>Image</th>
 <th>Name</th>
-<th>Model</th>
 <th>Description</th>
 <th>Price</th>
-<th>Type of Fuel</th>
 <th>Delete</th>
 <th>Edit</th>
 </tr>
@@ -215,10 +213,8 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 <tr>
 <td><img src="image_uploads/<?php echo $record['image']; ?>" width="100px" height="100px" /></td>
 <td><?php echo $record['name']; ?></td>
-<td class="left"><?php echo $record['model']; ?></td>
 <td class="left"><?php echo $record['description']; ?></td>
 <td class="right"><?php echo $record['price']; ?></td>
-<td class="left"><?php echo $record['type_of_fuel']; ?></td>
 <td><form action="delete_record.php" method="post"
 id="delete_record_form">
 <input type="hidden" name="record_id"

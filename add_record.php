@@ -23,6 +23,8 @@ if ($model_id == null || $model_id == false || $fuel_id == null || $fuel_id == f
 
     error_reporting(~E_NOTICE); 
 
+
+
 // avoid notice
 
     $imgFile = $_FILES['image']['name'];

@@ -1,18 +1,54 @@
 <?php
+require_once('database.php');
+// Get fuel ID
+if (!isset($fuel_id)) {
+    $fuel_id = filter_input(INPUT_GET, 'fuel_id', 
+    FILTER_VALIDATE_INT);
+    if ($fuel_id == NULL || $fuel_id == FALSE) {
+    $fuel_id = 1;
+    }
+    }
+
+// Get all fuels
+$queryAllFuels = 'SELECT * FROM fuel
+ORDER BY fuelID';
+$statement1 = $db->prepare($queryAllFuels);
+$statement1->execute();
+$fuels = $statement1->fetchAll();
+$statement1->closeCursor();
+
+// Get model ID
+if (!isset($model_id)) {
+    $model_id = filter_input(INPUT_GET, 'model_id', 
+    FILTER_VALIDATE_INT);
+    if ($model_id == NULL || $model_id == FALSE) {
+    $model_id = 1;
+    }
+    }
+    
+    
+// Get all models
+$queryAllmodels = 'SELECT * FROM models
+ORDER BY modelID';
+$statement1 = $db->prepare($queryAllmodels);
+$statement1->execute();
+$models = $statement1->fetchAll();
+$statement1->closeCursor();
+
 
 // Get the record data
 $record_id = filter_input(INPUT_POST, 'record_id', FILTER_VALIDATE_INT);
 $model_id = filter_input(INPUT_POST, 'model_id', FILTER_VALIDATE_INT);
 $fuel_id = filter_input(INPUT_POST, 'fuel_id', FILTER_VALIDATE_INT);
 $name = filter_input(INPUT_POST, 'name');
-$model = filter_input(INPUT_POST, 'model');
 $description = filter_input(INPUT_POST, 'description');
 $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-$type_of_fuel = filter_input(INPUT_POST, 'type_of_fuel');
+
+
 // Validate inputs
 if ($record_id == NULL || $record_id == FALSE || $model_id == NULL ||
-$model_id == FALSE || $fuel_id == NULL || $fuel_id == FALSE || empty($name) || empty($model) ||empty($description) ||
-$price == NULL || $price == FALSE || empty($type_of_fuel)) {
+$model_id == FALSE || $fuel_id == NULL || $fuel_id == FALSE || empty($name) ||empty($description) ||
+$price == NULL || $price == FALSE) {
 $error = "Invalid record data. Check all fields and try again.";
 include('error.php');
 } else {
@@ -51,26 +87,21 @@ $image = $original_image; // old image from database
 // If valid, update the record in the database
 require_once('database.php');
 
-echo $record_id;
 
 $query = 'UPDATE records
 SET modelID = :model_id,
 fuelID = :fuel_id,
 name = :name,
-model = :model,
 description = :description,
 price = :price,
-type_of_fuel = :type_of_fuel,
 image = :image
 WHERE recordID = :record_id';
 $statement = $db->prepare($query);
 $statement->bindValue(':model_id', $model_id);
 $statement->bindValue(':fuel_id', $fuel_id);
 $statement->bindValue(':name', $name);
-$statement->bindValue(':model', $model);
 $statement->bindValue(':description', $description);
 $statement->bindValue(':price', $price);
-$statement->bindValue(':type_of_fuel', $type_of_fuel);
 $statement->bindValue(':image', $image);
 $statement->bindValue(':record_id', $record_id);
 $statement->execute();

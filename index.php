@@ -2,7 +2,7 @@
 require_once('database.php');
 $model_name = "";
 $fuel_name ="";
-// Get model ID
+// Get Record ID
 if (!isset($record_id)) {
     $record_id = filter_input(INPUT_GET, 'record_id', 
     FILTER_VALIDATE_INT);

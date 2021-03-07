@@ -64,15 +64,13 @@ include('includes/header.php');
             </select>
             <br>
 
+       
+
             <label>Name:</label>
             <input type="input" name="name"
                    value="<?php echo $records['name']; ?>">
             <br>
 
-            <label>Model:</label>
-            <input type="input" name="model"
-                   value="<?php echo $records['model']; ?>">
-            <br>
 
             <label>Description:</label>
             <input type="input" name="description"
@@ -85,10 +83,7 @@ include('includes/header.php');
                    value="<?php echo $records['price']; ?>">
             <br>
 
-            <label>Type of fuel:</label>
-            <input type="input" name="type_of_fuel"
-                   value="<?php echo $records['type_of_fuel']; ?>">
-            <br>
+         
 
             <label>Image:</label>
             <input type="file" name="image" accept="image/*" />

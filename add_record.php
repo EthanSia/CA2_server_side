@@ -10,7 +10,7 @@ $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
 
 // Validate inputs
 if ($model_id == null || $model_id == false || $fuel_id == null || $fuel_id == false ||
-    $name == null || $name == false  ||$description == null || $description == false || $price == null || $price == false ) 
+    $name == null ||$description == null  || $price == null  ) 
     {
           $error = "Invalid product data. Check all fields and try again.";
           include('error.php');
@@ -82,7 +82,8 @@ if ($model_id == null || $model_id == false || $fuel_id == null || $fuel_id == f
     $statement->bindValue(':image', $image);
     $statement->execute();
     $statement->closeCursor();
-
-    // Display the Product List page
     include('index.php');
+
 }
+header("Location: index.php");
+?>

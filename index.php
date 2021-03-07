@@ -68,6 +68,7 @@ include('includes/header.php');
 
 <!-- display a list of fuels -->
 <form  method="post" action = " ">
+<h1><a href="index.php">All Records</a></h1>
 <h2>Models</h2>
 <nav>
 <ul>
@@ -195,12 +196,12 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 
 
 
-<section>
+<section class="ftco-section">
 <!-- display a table of records -->
 <h2><?php echo $model_name; ?></h2>
 <h2><?php echo $fuel_name; ?></h2>
-<h1>This is a normal h1</h1>
-<table>
+<table class= "table">
+<thead class="thead-primary">
 <tr>
 <th>Image</th>
 <th>Name</th>
@@ -209,12 +210,13 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 <th>Delete</th>
 <th>Edit</th>
 </tr>
+<thead class="thead-primary">
 <?php foreach ($records as $record) : ?>
-<tr>
-<td><img src="image_uploads/<?php echo $record['image']; ?>" width="100px" height="100px" /></td>
+<tr class="alert" role="alert">
+<td class="img"><img src="image_uploads/<?php echo $record['image']; ?>" width="100px" height="100px" /></td>
 <td><?php echo $record['name']; ?></td>
-<td class="left"><?php echo $record['description']; ?></td>
-<td class="right"><?php echo $record['price']; ?></td>
+<td class="email"><?php echo $record['description']; ?></td>
+<td class="quantity"><?php echo $record['price']; ?></td>
 <td><form action="delete_record.php" method="post"
 id="delete_record_form">
 <input type="hidden" name="record_id"

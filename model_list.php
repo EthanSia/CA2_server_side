@@ -14,7 +14,7 @@
 <?php
 include('includes/header.php');
 ?>
-    <h1>model List</h1>
+    <h1>Model List</h1>
     <table>
         <tr>
             <th>Name</th>
@@ -40,8 +40,9 @@ include('includes/header.php');
     <form action="add_model.php" method="post"
           id="add_model_form">
 
+    
         <label>Name:</label>
-        <input type="input" name="name">
+        <input type="input" name="name"  required>
         <input id="add_model_button" type="submit" value="Add">
     </form>
     <br>

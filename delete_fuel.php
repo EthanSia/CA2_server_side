@@ -17,6 +17,13 @@ if ($fuel_id == null || $fuel_id == false) {
     $statement->execute();
     $statement->closeCursor();
 
+    $query = 'DELETE FROM records 
+    WHERE fuelID = :fuel_id';
+    $statement1 = $db->prepare($query);
+    $statement1->bindValue(':fuel_id', $fuel_id);
+    $statement1->execute();
+    $statement1->closeCursor();
+
     // Display the Fuel List page
     include('fuel_list.php');
 }

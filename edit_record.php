@@ -13,7 +13,7 @@ $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
 if ($record_id == NULL || $record_id == FALSE || $model_id == NULL ||
 $model_id == FALSE || $fuel_id == NULL || $fuel_id == FALSE || empty($name) ||empty($description) ||
 $price == NULL || $price == FALSE) {
-$error = "Invalid record data 1. Check all fields and try again.";
+$error = "Invalid record data . Check all fields and try again.";
 include('error.php');
 } else {
 
@@ -71,7 +71,10 @@ $statement->bindValue(':record_id', $record_id);
 $statement->execute();
 $statement->closeCursor();
 
+include('index.php');
 
 }
+
+header("Location: index.php");
 ?>
 

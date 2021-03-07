@@ -16,6 +16,14 @@ if ($model_id == null || $model_id == false) {
     $statement->execute();
     $statement->closeCursor();
 
+    $query = 'DELETE FROM records 
+    WHERE modelID = :model_id';
+    $statement1 = $db->prepare($query);
+    $statement1->bindValue(':model_id', $model_id);
+    $statement1->execute();
+    $statement1->closeCursor();
+
+
 
     include('model_list.php');
 }

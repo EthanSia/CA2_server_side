@@ -99,4 +99,5 @@ include('includes/header.php');
         <p><a href="index.php">View Homepage</a></p>
     <?php
 include('includes/footer.php');
+
 ?>

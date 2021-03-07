@@ -1,0 +1,90 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 08, 2021 at 12:16 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `car_shop`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cars`
+--
+
+CREATE TABLE `cars` (
+  `carID` int(11) NOT NULL,
+  `modelID` int(11) NOT NULL,
+  `fuelID` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cars`
+--
+
+INSERT INTO `cars` (`carID`, `modelID`, `fuelID`, `name`, `description`, `price`, `image`) VALUES
+(1, 1, 3, 'AYGO X-PLAY - 5 DOOR HATCHBACK', '15\" steel wheels with wheel caps (8-double-spoke). Pre-Collision System. Smartphone Integration powered by Pioneer. Reversing Camera', '12690.00', 'aygo_small.png'),
+(2, 1, 3, 'AYGO X-CLUSIV - 5 DOOR HATCHBACK', ' 15\" black machined-face alloy wheels (10-double-spoke)\r\n Smart Entry & Push-button Start\r\n Automatic air conditioning\r\n Auto Headlights', '14710.00', 'aygo_small2.png'),
+(3, 1, 2, 'YARIS DYNAMIC - HATCHBACK', ' 17\" machined-face alloys wheels\r\n JBL® Premium Sound System with 8 Speakers\r\n Smart Entry & Push-button start\r\n Dual-zone automatic air conditioning', '21920.00', 'aygo_small3.png'),
+(4, 1, 2, 'YARIS LAUNCH EDITION - HATCHBACK', ' 17\" machined-face alloys wheels\r\n Blind Spot Monitor (BSM)\r\n 10\" coloured Head Up Display\r\n JBL® Premium Sound System with 8 Speakers', '24005.00', 'aygo_small4.png'),
+(5, 2, 4, 'PROACE VERSO SHUTTLE - LONG PEOPLE CARRIER', ' 16\" steel wheels with wheel caps (5-triple-spoke)\r\n 7\" Pro Touch® multimedia system with Smartphone integration incl Apple CarPlay™ & Android Auto™\r\n Go Navigation System\r\n Two sliding side doors', '37545.00', 'proace_diesel.png\r\n'),
+(6, 2, 4, 'PROACE VERSO VIP - LONG PEOPLE CARRIER', ' 2nd row captain chairs with 180 degree rotation\r\n Kick-activated motorised sliding side doors\r\n Reversing Camera\r\n Panoramic View Monitor (PVM)', '51595.00', 'proace_diesel2.png'),
+(7, 2, 1, 'PRIUS PLUG-IN BUSINESS EDITION PLUS - 5 DOOR HATCHBACK', ' 15\" Bi-tone Grey & Silver Alloy Wheels (5- double spoke)\r\n Smart Entry & Push-button Start\r\n Wireless mobile phone charger\r\n Smartphone integration incl Apple CarPlay™ & Android Auto™', '32645.00', 'prius_plugHybrid.png'),
+(8, 2, 1, 'PRIUS PLUG-IN EXCEL - 5 DOOR HATCHBACK', '15\" Bi-tone Grey & Silver Alloy Wheels (5- double spoke)\r\n JBL® Premium Sound System with 10 Speakers\r\n Simple Intelligent Parking Assist (SIPA)\r\n Toyota Touch® 2 with Go Navigation', '34735.00', 'prius_plugHybrid2.png'),
+(9, 2, 2, 'COROLLA SALOON DESIGN - 4 DOOR', ' 17\" Machined-face Alloy Wheels\r\n Intelligent Adaptive Cruise Control\r\n Heated driver & front passenger seats\r\n Toyota Touch® 2 with Go Navigation', '26260.00', 'carolla_petrolHybrid.png'),
+(10, 3, 1, 'RAV4 PLUG-IN DESIGN - 5 DOOR SUV', 'RAV4 PLUG-IN DESIGN - 5 DOOR SUV\r\n 18\" Grey Machined-face alloy wheels (5-spoke)\r\n 9\" Toyota Touch® 2 multimedia system with Smartphone integration incl Apple CarPlay™ & Android Auto™\r\n Remote Controlled Dual-zone automatic air conditioning\r\n Fast charger', '46495.00', 'suv_plug1.png'),
+(11, 3, 2, 'TOYOTA C-HR DESIGN - 5 DOOR CROSSOVER', ' 18\" Black Machined-face Alloy wheels (5-double-spoke)\r\n Simple Intelligent Parking Assist (S-IPA)\r\n Toyota Touch® 2 with Go Navigation\r\n Heated driver & front passenger seats', '29885.00', 'chr_hybrid2.png'),
+(12, 3, 2, 'TOYOTA C-HR ICON - 5 DOOR CROSSOVER', ' 17\" Silver Alloy wheels (5-double-spoke)\r\n Smartphone integration incl Apple CarPlay™ & Android Auto™\r\n Pre-Collision System with Cyclist Detection, Day & Night-time Pedestrian Detection\r\n Reversing Camera', '26885.00', 'chr_hybrid.png'),
+(13, 3, 4, 'LAND CRUISER ACTIVE - 3 DOOR (5 SEAT) SUV', ' 17\" Silver alloy wheels (6-spoke)\r\n 8” Toyota Touch® 2 multimedia system with Smartphone integration incl Apple CarPlay™ & Android Auto™\r\n Rear parking sensors\r\n Reversing Camera', '42345.00', 'land_cruiser_diesel.png'),
+(14, 1, 1, 'LAND CRUISER ACTIVE - 5 DOOR SUV', '17', '43690.00', 'land_cruiser_diesel2.png'),
+(15, 4, 3, 'GR YARIS1.6 - HATCHBACK', '18\" Cast Black Alloy wheels (15-spoke)\r\nMacPherson Strut Front Suspension\r\nDouble Wishbone Rear Suspension\r\n4WD Open Differential', '29995.00', 'gr_petrol.jpg'),
+(16, 4, 3, 'GR SUPRA 2.0 PRO - 2 DOOR COUPÉ', 'Combining performance and style the 2.0 GR Supra offers high-end comfort and driving experience.\r\n 18\" Black & Silver Bi-tone Machined-face Alloy wheels (5-double-spoke)\r\n Active Sports Differential\r\n Adaptive Variable S', '45995.00', 'gr_petrol1.png'),
+(17, 4, 3, 'GR SUPRA 3.0 PRO - 2 DOOR COUPÉ', ' 19\" Black & Silver Forged Alloy wheels (5-Double-Spoke)\r\n JBL® Premium Sound System\r\n 12 speakers\r\n Wireless mobile phone charger', '54960.00', 'gr_petrol2.png'),
+(18, 5, 4, 'HILUX ACTIVE - 2 DOOR SINGLE CAB', ' 17\" Black Steel wheels\r\n Pre-Collision System with Pedestrian and Cyclist Detection\r\n Manual air conditioning\r\n 4x4 - Rear Differential Lock', '26895.00', 'hilux_diesel.png'),
+(19, 5, 4, 'HILUX INVINCIBLE - 4 DOOR DOUBLE CAB', ' 18\" black machined-face alloy wheels (6-spoke)\r\n Smart Entry & Push-button start\r\n LED Dual-beam Projector headlights\r\n Heated driver & front passenger seats', '34925.00', 'hilux_diesel2.png'),
+(20, 5, 4, 'HILUX INVINCIBLE X - 4 DOOR DOUBLE CAB', ' 18\" black alloy wheels (5-spoke)\r\n JBL® Premium Sound System\r\n Toyota Touch® 2 with Go Navigation\r\n Power-height-adjustable driver seat', '39675.00', 'hilux_diesel3.png');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cars`
+--
+ALTER TABLE `cars`
+  ADD PRIMARY KEY (`carID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `cars`
+--
+ALTER TABLE `cars`
+  MODIFY `carID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -80,7 +80,7 @@ include('includes/header.php');
 
             <label>List Price:</label>
             <input type="input" name="price"
-                   value="<?php echo $cars['price']; ?>" pattern="^[1-9][1-9]*[.]?[1-9]{0,2}$"  required>
+                   value="<?php echo $cars['price']; ?>"   required>
             <br>
 
          

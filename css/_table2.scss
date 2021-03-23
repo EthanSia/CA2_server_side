@@ -47,7 +47,7 @@
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
   
-  article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+  article, aside, figcaption, figure, footer, hgroup, main, nav, section {
     display: block; }
   
   body {
@@ -69,7 +69,7 @@
     height: 0;
     overflow: visible; }
   
-  h1, h2, h3, h4, h5, h6 {
+ h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 0.5rem; }
   
@@ -301,14 +301,12 @@
   [hidden] {
     display: none !important; }
   
-  h1, h2, h3, h4, h5, h6,
-  .h1, .h2, .h3, .h4, .h5, .h6 {
+ h2, h3, h4, h5, h6, .h2, .h3, .h4, .h5, .h6 {
     margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2; }
   
-  h1, .h1 {
-    font-size: 2.5rem; }
+
   
   h2, .h2 {
     font-size: 2rem; }
@@ -2710,13 +2708,7 @@
   .dropdown-menu.show {
     display: block; }
   
-  .dropdown-header {
-    display: block;
-    padding: 0.5rem 1.5rem;
-    margin-bottom: 0;
-    font-size: 0.875rem;
-    color: #6c757d;
-    white-space: nowrap; }
+
   
   .dropdown-item-text {
     display: block;
@@ -8152,8 +8144,8 @@
       -webkit-box-shadow: none;
       box-shadow: none; }
   
-  h1, h2, h3, h4, h5,
-  .h1, .h2, .h3, .h4, .h5 {
+ h2, h3, h4, h5,
+ .h2, .h3, .h4, .h5 {
     line-height: 1.5;
     font-weight: 400;
     font-family: "Poppins", Arial, sans-serif;

@@ -7,4 +7,14 @@
 
 <!-- the body section -->
 <body>
-<header><h1>Toyota</h1></header>
+<header><h1>Toyota</h1>
+<div class="topnav">
+  <a class="active" href="index.php">Home</a>
+  <a href="add_car_form.php">Add Cars</a>
+  <a href="model_list.php">Manage Models</a>
+  <a href="fuel_list.php">Manage Fuels</a>
+  <a href="contact.php">Contact</a>
+  <a href="register.php">Register</a>
+  <a href="login.php">Login</a>
+</div>
+</header>

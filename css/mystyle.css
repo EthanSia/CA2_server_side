@@ -2,7 +2,6 @@
 /* Here is where the header styles start*/
 header {
   margin: 0;
-  border-bottom: 2px solid black;
 }
 
 header h1 {
@@ -20,6 +19,30 @@ nav ul {
 
 nav ul li {
   padding-bottom: 0.5em;
+}
+
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
 }
 
 /*Here is where the body styles start*/
@@ -212,7 +235,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+article, aside, figcaption, figure, footer, hgroup, main, nav, section {
   display: block;
 }
 
@@ -238,7 +261,7 @@ hr {
   overflow: visible;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
@@ -524,15 +547,10 @@ template {
   display: none !important;
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h2, h3, h4, h5, h6, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
-}
-
-h1, .h1 {
-  font-size: 2.5rem;
 }
 
 h2, .h2 {
@@ -3640,15 +3658,6 @@ input[type="button"].btn-block {
 
 .dropdown-menu.show {
   display: block;
-}
-
-.dropdown-header {
-  display: block;
-  padding: 0.5rem 1.5rem;
-  margin-bottom: 0;
-  font-size: 0.875rem;
-  color: #6c757d;
-  white-space: nowrap;
 }
 
 .dropdown-item-text {
@@ -10746,8 +10755,8 @@ a:hover, a:focus {
   box-shadow: none;
 }
 
-h1, h2, h3, h4, h5,
-.h1, .h2, .h3, .h4, .h5 {
+h2, h3, h4, h5,
+.h2, .h3, .h4, .h5 {
   line-height: 1.5;
   font-weight: 400;
   font-family: "Poppins", Arial, sans-serif;

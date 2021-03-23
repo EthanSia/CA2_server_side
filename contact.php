@@ -1,33 +1,15 @@
-<!DOCTYPE HTML> 
-<html>
-<head>
-	<title>Contact us</title>
-<!-- define some style elements-->
-<style>
-h1
-{
-	font-family : Arial, Helvetica, sans-serif;
-	font-size : 16px;
-    font-weight : bold;
-}
-label,a 
-{
-	font-family : Arial, Helvetica, sans-serif;
-	font-size : 12px; 
-}
 
-</style>	
-<!-- a helper script for validating the form-->
-<script language="JavaScript" src="scripts/gen_validatorv31.js" type="text/javascript"></script>
-</head>	
-</head>
+<!-- the head section -->
+ <div class="container">
+<?php
+include('includes/header.php');
+?>
 
-<body>
 <h1>Contact us</h1>
 <form method="POST" name="contactform" action="contact-form-handler.php"> 
 <p>
 <label for='name'>Your Name:</label> <br>
-<input type="text" name="name">
+<input type="text" name="name" >
 </p>
 <p>
 <label for='email'>Email Address:</label> <br>
@@ -47,5 +29,6 @@ frmvalidator.addValidation("email","req","Please provide your email");
 frmvalidator.addValidation("email","email","Please enter a valid email address"); 
 </script>
 
-</body>
-</html>
+ <?php
+include('includes/footer.php');
+?>

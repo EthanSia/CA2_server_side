@@ -1,10 +1,8 @@
 <?php 
 $errors = '';
-<<<<<<< HEAD
+
 $myemail = 'D00225319@student.dkit.ie';//<-----Put your DkIT email address here.
-=======
-$myemail = 'd00225319@student.dkit.ie';//<-----Put your DkIT email address here.
->>>>>>> contact-form
+
 if(empty($_POST['name'])  || 
    empty($_POST['email']) || 
    empty($_POST['message']))

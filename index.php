@@ -1,4 +1,26 @@
 <?php
+
+/**
+ * Start the session.
+ */
+session_start();
+
+/**
+ * Check if the user is logged in.
+ */
+if(!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in'])){
+    //User not logged in. Redirect them back to the login.php page.
+    header('Location: login.php');
+    exit;
+}
+
+
+/**
+ * Print out something that only logged in users can see.
+ */
+
+echo 'Congratulations! You are logged in!';
+
 require_once('database.php');
 $model_name = "";
 $fuel_name ="";
@@ -201,6 +223,7 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 
 <section class="ftco-section">
 <!-- display a table of cars -->
+<h2><?php echo $_SESSION['user_id']; ?></h2>
 <h2><?php echo $model_name; ?></h2>
 <h2><?php echo $fuel_name; ?></h2>
 <table class= "table">
@@ -210,8 +233,16 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 <th>Name</th>
 <th>Description</th>
 <th>Price</th>
+<?php
+if($_SESSION['user_id'] == 1)
+{
+?>
 <th>Delete</th>
 <th>Edit</th>
+<?php
+}
+?>
+
 </tr>
 <thead class="thead-primary">
 <?php foreach ($cars as $car) : ?>
@@ -220,6 +251,11 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 <td><?php echo $car['name']; ?></td>
 <td class="email"><?php echo $car['description']; ?></td>
 <td class="quantity"><?php echo $car['price']; ?></td>
+
+<?php
+if($_SESSION['user_id'] == 1)
+{
+?>
 <td><form action="delete_car.php" method="post"
 id="delete_car_form">
 <input type="hidden" name="car_id"
@@ -228,8 +264,11 @@ value="<?php echo $car['carID']; ?>">
 value="<?php echo $car['fuelID']; ?>">
 <input type="hidden" name="model_id"
 value="<?php echo $car['modelID']; ?>">
+
 <input type="submit" value="Delete">
+
 </form></td>
+
 <td><form action="edit_car_form.php" method="post"
 id="delete_car_form">
 <input type="hidden" name="car_id"
@@ -238,14 +277,26 @@ value="<?php echo $car['carID']; ?>">
 value="<?php echo $car['fuelID']; ?>">
 <input type="hidden" name="model_id"
 value="<?php echo $car['modelID']; ?>">
+
 <input type="submit" value="Edit">
 </form></td>
+<?php
+}
+?>
 </tr>
 <?php endforeach; ?>
 </table>
+<?php
+if($_SESSION['user_id'] == 1)
+{
+?>
 <p><a href="add_car_form.php">Add Car</a></p>
 <p><a href="model_list.php">Manage models</a></p>
 <p><a href="fuel_list.php">Manage Fuels</a></p>
+<?php
+}
+?>
+
 </section>
 <?php
 include('includes/footer.php');

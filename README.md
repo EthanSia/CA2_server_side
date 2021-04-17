@@ -7,6 +7,12 @@ This respository hosts a working Toyota PHP CRUD application.  this is a public 
 * Next, you will need to go to phpMyAdmin.me to create your first databease in the section called "Database"
 * Then, download the car.txt and import it into the database that you have created in phpMyAdmin
 * After that,Configure the database.php file to connect to your SQL database
+* After that, dowlaod these codes from the github as the zip file.
+* After that,unzip it and open it with visual studio.
+* Then, go to  change the database name in database.php to yours database name
+* Finally right click the php file name at the top and click on 'Open in        browser'
+* After tat, you will see the project run in your browser
+
 
 ####See the project running on a remote server [Project homepage](https://mysql04.comp.dkit.ie/D00225319/ca2_2021/index.php)
 

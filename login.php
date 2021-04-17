@@ -18,7 +18,7 @@ require 'libary-folder/password.php';
  */
 require 'login_connect.php';
 
-
+$errors = "";
 //If the POST var "login" exists (our submit button), then we can
 //assume that the user has submitted the login form.
 if(isset($_POST['login'])){
@@ -40,11 +40,13 @@ if(isset($_POST['login'])){
     //Fetch row.
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
+
     //If $row is FALSE.
     if($user === false){
         //Could not find a user with that username!
         //PS: You might want to handle this error in a more user-friendly manner!
-        die('Incorrect username / password combination!');
+        $errors = "Incorrect username or password";
+        
     } else{
         //User account found. Check to see if the given password matches the
         //password hash that we stored in our users table.
@@ -65,7 +67,8 @@ if(isset($_POST['login'])){
             
         } else{
             //$validPassword was FALSE. Passwords do not match.
-            die('Incorrect username / password combination!');
+            header('Location: login.php');
+            $errors = "Incorrect username or password";
         }
     }
     
@@ -83,6 +86,13 @@ include('includes/header.php');
             <label for="password">Password</label>
             <input type="text" id="password" name="password" required><br>
             <input type="submit" name="login" value="Login">
+            <p>
+  		       <?php echo $errors?>
+        	</p>
+            <p>
+  		        Not a member? <a href="register_form.php">Register</a>
+        	</p>
+
         </form>
  <?php
 include('includes/footer.php');

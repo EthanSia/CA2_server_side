@@ -24,6 +24,7 @@ require 'login_connect.php';
 $username = "";
 $email    = "";
 $errors = array(); 
+$error = ""; 
 
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'car_shop');
@@ -38,7 +39,7 @@ if (isset($_POST['reg_user'])) {
 
   // form validation: ensure that the form is correctly filled ...
   // by adding (array_push()) corresponding error unto $errors array
-  if (empty($username)) { array_push($errors, "Username is required"); }
+  if (empty($username)) { $error = "Username is required"; }
   if (empty($email)) { array_push($errors, "Email is required"); }
   if (empty($password_1)) { array_push($errors, "Password is required"); }
   if ($password_1 != $password_2) {
@@ -53,7 +54,7 @@ if (isset($_POST['reg_user'])) {
   
   if ($user) { // if user exists
     if ($user['username'] === $username) {
-      array_push($errors, "Username already exists");
+      $error =  "Username already exists";
     }
 
     if ($user['email'] === $email) {
@@ -74,4 +75,46 @@ if (isset($_POST['reg_user'])) {
   }
 }
 
+
+?>
+
+
+
+
+
+<!-- the head section -->
+ <div class="container">
+<?php
+include('includes/header.php');
+?>
+<?php
+include('errors.php');
+?>
+<h2>Register</h2> 
+  <form method="post" action="register_form.php">
+  	<div class="input-group">
+  	  <label>Username</label>
+  	  <input type="text" name="username" title = "<?php echo $error; ?>">
+  	</div>
+  	<div class="input-group">
+  	  <label>Email</label>
+  	  <input type="email" name="email" title = "<?php echo $email; ?>">
+  	</div>
+  	<div class="input-group">
+  	  <label>Password</label>
+  	  <input type="password" name="password_1" title = "<?php echo $errors ?>">
+  	</div>
+  	<div class="input-group">
+  	  <label>Confirm password</label>
+  	  <input type="password" name="password_2" title = "<?php echo $errors ?>">
+  	</div>
+  	<div class="input-group">
+  	  <button type="submit" class="btn" name="reg_user">Register</button>
+  	</div>
+  	<p>
+  		Already a member? <a href="login.php">Sign in</a>
+  	</p>
+  </form>
+<?php
+include('includes/footer.php');
 ?>

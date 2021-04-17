@@ -13,7 +13,7 @@
 <div class="topnav">
   <a class="active" href="index.php">Home</a>
   <?php
-  if($id== 1)
+  if($_SESSION['user_id']== 1)
   {
   ?>
   <a href="display_users.php">Display Users</a>

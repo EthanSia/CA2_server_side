@@ -1,4 +1,19 @@
+<?php
 
+/**
+ * Start the session.
+ */
+session_start();
+
+/**
+ * Check if the user is logged in.
+ */
+if(!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in'])){
+    //User not logged in. Redirect them back to the login.php page.
+    header('Location: login.php');
+    exit;
+}
+?>
 <!-- the head section -->
  <div class="container">
 <?php
@@ -9,15 +24,19 @@ include('includes/header.php');
 <form method="POST" name="contactform" action="contact-form-handler.php"> 
 <p>
 <label for='name'>Your Name:</label> <br>
-<input type="text" name="name" >
+<input type="text" name="name"  required>
 </p>
 <p>
 <label for='email'>Email Address:</label> <br>
-<input type="text" name="email"> <br>
+<input class="errors" type="text" name="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" title="Please enter the valid email" required> <br>
+</p>
+<p>
+<label for='birth'>Birth Day:</label> <br>
+<input type="date" name="birth" required> <br>
 </p>
 <p>
 <label for='message'>Message:</label> <br>
-<textarea name="message"></textarea>
+<textarea name="message" required></textarea>
 </p>
 <input type="submit" value="Submit"><br>
 </form>

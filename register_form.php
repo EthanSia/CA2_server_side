@@ -26,6 +26,7 @@ $email    = "";
 $errors = array(); 
 $error = ""; 
 
+
 // connect to the database
 $db = mysqli_connect('localhost', 'root', '', 'car_shop');
 
@@ -41,7 +42,13 @@ if (isset($_POST['reg_user'])) {
   // by adding (array_push()) corresponding error unto $errors array
   if (empty($username)) { array_push($errors, "Username is required");  }
   if (empty($email)) { array_push($errors, "Email is required"); }
-  if (empty($password_1)) { array_push($errors, "Password is required"); }
+  if (!preg_match('/[^@]+@[^@]+\.[a-zA-Z]{2,6}/', $email)) {
+    array_push($errors, "Please enter a valid email like abc@gmail.com");
+    }
+  if (empty($password_1) ){ array_push($errors, "Password is required"); }
+  if (!preg_match('/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[£!#€$%^&*]).{10,}/', $password_1)) {
+    array_push($errors, "Password must be 10 digits which include at least one lowercase letter, one uppercase letter, one digit and one of the following characters (£!#€$%^&*) ");
+    }
   if ($password_1 != $password_2) {
 	array_push($errors, "The two passwords do not match");
   }
@@ -87,14 +94,12 @@ if (isset($_POST['reg_user'])) {
 <?php
 include('includes/header.php');
 ?>
-<?php
-include('errors.php');
-?>
+
 <h2>Register</h2> 
   <form method="post" action="register_form.php">
   	<div class="input-group">
   	  <label>Username</label>
-  	  <input type="text" name="username" title = "<?php echo $error; ?>">
+  	  <input class="errors" type="text" name="username" title = "<?php echo $error; ?>">
   	</div>
   	<div class="input-group">
   	  <label>Email</label>
@@ -108,9 +113,10 @@ include('errors.php');
   	  <label>Confirm password</label>
   	  <input type="password" name="password_2" title = "<?php echo $errors ?>">
   	</div>
-  	<div class="input-group">
-  	  <button type="submit" class="btn" name="reg_user">Register</button>
-  	</div>
+    <?php
+    include('errors.php');
+    ?>
+    <input type="submit" name="reg_user" value="Register">
   	<p>
   		Already a member? <a href="login.php">Sign in</a>
   	</p>

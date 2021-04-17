@@ -67,8 +67,9 @@ if(isset($_POST['login'])){
             
         } else{
             //$validPassword was FALSE. Passwords do not match.
-            header('Location: login.php');
             $errors = "Incorrect username or password";
+            header('Location: login.php');
+           
         }
     }
     
@@ -86,7 +87,7 @@ include('includes/header.php');
             <label for="password">Password</label>
             <input type="text" id="password" name="password" required><br>
             <input type="submit" name="login" value="Login">
-            <p>
+            <p class="errors">
   		       <?php echo $errors?>
         	</p>
             <p>

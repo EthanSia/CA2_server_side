@@ -167,7 +167,12 @@ h1, h2 {
 }
 
 p {
-  font-size: 36px;
+  font-size: 18px;
+}
+
+.errors {
+  color: red;
+  font-size: 20px;
 }
 
 /*Here is where the footer styles start*/
@@ -10912,5 +10917,75 @@ h2, h3, h4, h5,
 
 .checkbox-primary input:checked ~ .checkmark:after {
   color: #99b19c;
+}
+/* Here is where the register styles start*/
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  font-size: 120%;
+  background: #F8F8FF;
+}
+
+.header {
+  width: 30%;
+  margin: 50px auto 0px;
+  color: white;
+  background: #5F9EA0;
+  text-align: center;
+  border: 1px solid #B0C4DE;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 20px;
+}
+
+form, .content {
+  width: 30%;
+  margin: 0px auto;
+  padding: 20px;
+  border: 1px solid #B0C4DE;
+  background: white;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.input-group {
+  margin: 10px 0px 10px 0px;
+}
+
+.input-group label {
+  display: block;
+  text-align: left;
+  margin: 3px;
+}
+
+.input-group input {
+  height: 30px;
+  width: 93%;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.btn {
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  background: #5F9EA0;
+  border: none;
+  border-radius: 5px;
+}
+
+.error {
+  width: 92%;
+  margin: 0px auto;
+  padding: 10px;
+  border: 1px solid #a94442;
+  color: #a94442;
+  background: #f2dede;
+  border-radius: 5px;
+  text-align: left;
 }
 /*# sourceMappingURL=mystyle.css.map */

@@ -1,4 +1,6 @@
-
+<?php
+ $id = isset($_SESSION['user_id']);
+?>
 <head>
 <title>Toyota</title>
 <link rel="stylesheet" type="text/css" href="css/mystyle.css">
@@ -10,9 +12,8 @@
 <header><h1>Toyota</h1>
 <div class="topnav">
   <a class="active" href="index.php">Home</a>
-
   <?php
-  if($_SESSION['user_id']== 1)
+  if($id== 1)
   {
   ?>
   <a href="display_users.php">Display Users</a>
@@ -22,10 +23,9 @@
   <?php 
   }
   ?>
-
   <a href="contact.php">Contact</a>
   <?php
-  if($_SESSION['user_id'] > 0)
+  if($id > 0)
   {
   ?>
       <a href="logout.php">Log Out</a>

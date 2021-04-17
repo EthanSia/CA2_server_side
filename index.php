@@ -223,7 +223,7 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 
 <section class="ftco-section">
 <!-- display a table of cars -->
-<h2><?php echo $_SESSION['user_id']; ?></h2>
+
 <h2><?php echo $model_name; ?></h2>
 <h2><?php echo $fuel_name; ?></h2>
 <table class= "table">

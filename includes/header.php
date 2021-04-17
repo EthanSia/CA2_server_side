@@ -1,4 +1,3 @@
-<!-- the head section -->
 
 <head>
 <title>Toyota</title>
@@ -13,9 +12,10 @@
   <a class="active" href="index.php">Home</a>
 
   <?php
-  if(isset($_SESSION['user_id'])=== 1)
+  if($_SESSION['user_id']== 1)
   {
   ?>
+  <a href="display_users.php">Display Users</a>
   <a href="add_car_form.php">Add Cars</a>
   <a href="model_list.php">Manage Models</a>
   <a href="fuel_list.php">Manage Fuels</a>
@@ -25,7 +25,7 @@
 
   <a href="contact.php">Contact</a>
   <?php
-  if(isset($_SESSION['user_id']) > 0)
+  if($_SESSION['user_id'] > 0)
   {
   ?>
       <a href="logout.php">Log Out</a>

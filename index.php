@@ -223,6 +223,7 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 
 <section class="ftco-section">
 <!-- display a table of cars -->
+<h2><?php echo $_SESSION['user_id']; ?></h2>
 <h2><?php echo $model_name; ?></h2>
 <h2><?php echo $fuel_name; ?></h2>
 <table class= "table">
@@ -233,7 +234,7 @@ if(!empty($_POST['models']) && empty($_POST['fuels']))
 <th>Description</th>
 <th>Price</th>
 <?php
-if(isset($_SESSION['user_id'])=== 1)
+if($_SESSION['user_id'] == 1)
 {
 ?>
 <th>Delete</th>
@@ -252,7 +253,7 @@ if(isset($_SESSION['user_id'])=== 1)
 <td class="quantity"><?php echo $car['price']; ?></td>
 
 <?php
-if(isset($_SESSION['user_id'])=== 1)
+if($_SESSION['user_id'] == 1)
 {
 ?>
 <td><form action="delete_car.php" method="post"
@@ -286,7 +287,7 @@ value="<?php echo $car['modelID']; ?>">
 <?php endforeach; ?>
 </table>
 <?php
-if(isset($_SESSION['user_id'])=== 0)
+if($_SESSION['user_id'] == 1)
 {
 ?>
 <p><a href="add_car_form.php">Add Car</a></p>
